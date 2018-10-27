@@ -19,7 +19,7 @@ let Letter = function(character) {
 
 module.exports = Letter;
 
-let guessedChar = process.argv[3];
+/*let guessedChar = process.argv[3];
 let guess = process.argv[2];
 let letter = new Letter(guess);
 //console.log(letter.toString);
@@ -28,5 +28,5 @@ console.log(letter.guessed);
 console.log(letter.renderChar());
 letter.checkGuess(guessedChar);
 console.log(letter.guessed);
-console.log(letter.renderChar());
+console.log(letter.renderChar());*/
 

@@ -1,5 +1,5 @@
 const Letter = require('./letter');
-let letter = new Letter;
+//let letter = new Letter();
 
 let Word = function(chosenWord) {
     this.chosenWord = chosenWord;
@@ -11,16 +11,24 @@ let Word = function(chosenWord) {
             let newLetter = new Letter(chosenWordArray[k]);
             this.wordArray.push(newLetter);
         }
-        console.log(this.wordArray);
+        //console.log(this.wordArray);
 
+        this.wordArray.forEach(arrLetter => {
+            console.log(arrLetter.renderChar());
+            const fullWord = this.wordArray.map(wordLetter => {
+                return wordLetter.toString;
+            });
 
-        for (let k = 0; k < this.wordArray.length; k++) {
+            console.log(fullWord.join(''));
+        });
+        //console.log(this.wordArray);
+/*        for (let k = 0; k < this.wordArray.length; k++) {
             if (!this.wordArray[k].guessed) {
                 console.log(this.wordArray[k].placeholder);
             } else {
                 console.log(this.wordArray[k].toString);
             }
-        }
+        }*/
     };
     this.guess = function(character) {
         this.wordArray.forEach(letter.checkGuess(character))
