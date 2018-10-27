@@ -1,2 +1,3 @@
 # Constructor-Word-Guess
-Homework 11 - Advanced JavaScript Assignment
+##### Homework 11 - Optional Advanced JavaScript Assignment
+
