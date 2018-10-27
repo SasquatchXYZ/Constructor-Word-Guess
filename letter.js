@@ -3,18 +3,21 @@ let Letter = function(character) {
     this.placeholder = '_';
     this.guessed = false;
     this.renderChar = function() {
-        if (this.guessed === true) {
-            return this.toString;
-        } else {
+        if (!this.guessed) {
             return this.placeholder;
+        } else {
+            return this.toString;
         }
     };
     this.checkGuess = function(userGuess) {
-        if (userGuess === character) {
+        if (userGuess === this.toString) {
             this.guessed = true
         }
     }
 };
+
+
+module.exports = Letter;
 
 let guessedChar = process.argv[3];
 let guess = process.argv[2];
