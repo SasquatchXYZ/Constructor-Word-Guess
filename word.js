@@ -13,14 +13,25 @@ let Word = function(chosenWord) {
         }
         //console.log(this.wordArray);
 
-        this.wordArray.forEach(arrLetter => {
+        this.wordArray.forEach(arrayLetter => {
+            console.log(arrayLetter.renderChar());
+        });
+
+        const displayWord = this.wordArray.map(wordLetter => {
+            return wordLetter.renderChar();
+        });
+        console.log(displayWord.toString());
+
+/*        this.wordArray.forEach(arrLetter => {
             console.log(arrLetter.renderChar());
             const fullWord = this.wordArray.map(wordLetter => {
                 return wordLetter.toString;
             });
 
             console.log(fullWord.join(''));
-        });
+        });*/
+
+
         //console.log(this.wordArray);
 /*        for (let k = 0; k < this.wordArray.length; k++) {
             if (!this.wordArray[k].guessed) {
