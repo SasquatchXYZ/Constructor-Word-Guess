@@ -1,15 +1,15 @@
-let Letter = function(character) {
+let Letter = function (character) {
     this.toString = character;
     this.placeholder = '_';
     this.guessed = false;
-    this.renderChar = function() {
+    this.renderChar = function () {
         if (!this.guessed) {
             return this.placeholder;
         } else {
             return this.toString;
         }
     };
-    this.checkGuess = function(userGuess) {
+    this.checkGuess = function (userGuess) {
         if (userGuess === this.toString) {
             this.guessed = true
         }
