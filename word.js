@@ -20,7 +20,7 @@ let Word = function(chosenWord) {
         const displayWord = this.wordArray.map(wordLetter => {
             return wordLetter.renderChar();
         });
-        console.log(displayWord.toString());
+        console.log(displayWord.toString().split(',').join(' '));
 
 /*        this.wordArray.forEach(arrLetter => {
             console.log(arrLetter.renderChar());
