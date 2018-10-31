@@ -35,6 +35,7 @@ function welcome() {
 function startGame() {
     chosenWord = '';
     guessesLeft = 12;
+    console.log(usedWords);
     if (usedWords.length < wordsArray.length) {
         chosenWord = wordSelector();
     } else {
@@ -60,7 +61,7 @@ function wordSelector() {
 }
 
 function promptGuesses() {
-    let userGuesses = [];
+    let scorekeeper = [];
     word.stringifyWord();
     inquirer
         .prompt([
@@ -71,9 +72,38 @@ function promptGuesses() {
             }
         ])
         .then(function(response) {
-            userGuesses.push(response.userGuess);
+/*            word.wordArray.forEach(letter => {
+                letter(response.userguess);
+                scorekeeper.push(letter.renderChar());
+            });*/
+            //scorekeeper.push(response.userGuess);
             word.guess(response.userGuess);
-            promptGuesses();
+            word.wordArray.filter(Letter => {
+                scorekeeper.push(Letter.guessed);
+            });
+            //console.log(scorekeeper);
+            //promptGuesses();
+
+            if (scorekeeper.indexOf(false) > -1 && guessesLeft > 0) {
+                guessesLeft--;
+                if (guessesLeft === 0) {
+                    console.log(`I'm sorry ${playerName} you used up all your guesses`);
+                    restartGame();
+                } else {
+                    promptGuesses();
+                }
+            } else {
+                console.log(`Congrats! you guessed the word! The word was indeed ${word.stringifyWord()}`);
+                startGame();
+            }
+
+/*            if (scorekeeper.indexOf(false) === -1) {
+                console.log(`Congrats! you guessed the word!`);
+            } else if (scorekeeper.indexOf(false) > -1 && guessesLeft > 0) {
+                promptGuesses();
+            }*/
+
+
         });
 }
 
