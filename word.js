@@ -52,6 +52,9 @@ let Word = function (chosenWord) {
     }
 };
 
+module.exports = Word;
+
+/*
 let chosenWord = 'pangolin';
 let word = new Word(chosenWord);
 console.log(word.chosenWord);
@@ -61,4 +64,4 @@ word.stringifyWord();
 word.guess("a");
 word.stringifyWord();
 word.guess("n");
-word.stringifyWord();
+word.stringifyWord();*/
