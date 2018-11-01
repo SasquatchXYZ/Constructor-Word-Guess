@@ -34,7 +34,7 @@ function welcome() {
 
 function startGame() {
     chosenWord = '';
-    guessesLeft = 20;
+    guessesLeft = 15;
     //console.log(usedWords);
     if (usedWords.length < wordsArray.length) {
         chosenWord = wordSelector();
