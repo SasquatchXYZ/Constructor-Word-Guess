@@ -3,7 +3,9 @@
 
 This is a Hangman game that runs in the command line using Node.js, programmed using constructor functions, because... who doesn't love a good Constructor.  They are even better when I don't manage to break them.  I used a very large word bank that I had written up for a previous assignment including quite a lot of various animals.  Namely all of the national animals for the countries in the world, and then a few more random ones I added in... because pangolins are amazing and you have to include a labradoodle...
 
-[Constructor-Word-Guess](screenshots/LIRIBotv2.gif) 
+There is a second version of the game which uses the 'prompt' npm module in places for the queries, which allowed me to restrict the character inputs to just letters, or a space (which is used to exit the game).  Rather that using the word bank that I had previously generated this one uses the 'random-words' npm module to provide a random word for the game.
+
+![Constructor-Word-Guess](screenshots/LIRIBotv2.gif) 
 
 ## Getting Started
 
@@ -31,6 +33,9 @@ This should install all the requisite modules, but just in case, the only one cu
 
 ```
 inquirer
+prompt
+colors
+random-words
 ```
 ## Running The Game
 
@@ -38,6 +43,12 @@ The Constructor-Word-Guess game is initialized from the command line via:
 
 ```
 node index.js
+```
+
+And the alternate version using the random-words module and prompt are intialized via:
+
+```
+node prompt.js
 ```
 
 And it will prompt you via inquirer for your name and then simply ask for you to guess letters for the word.

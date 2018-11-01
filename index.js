@@ -17,7 +17,7 @@ let playerName;
 
 function welcome() {
     usedWords = [];
-    console.log(`Hello and Welcome to Command Line Hangman featuring ALL OF THE ANIMALS`.trap.yellow);
+    console.log(`Hello and Welcome to Command Line Hangman featuring ALL OF THE ANIMALS`.bold.yellow);
     console.log(`----------------------------------------------------------------------`.rainbow);
     inquirer
         .prompt([
@@ -89,7 +89,7 @@ function promptGuesses() {
             if (scorekeeper.indexOf(false) > -1 && guessesLeft > 0) {
                 guessesLeft--;
                 if (guessesLeft === 0) {
-                    console.log(`I'm sorry ${playerName} you used up all your guesses`.italic.red);
+                    console.log(`I'm sorry ${playerName} you used up all your guesses... the word was "${chosenWord}"`.italic.red);
                     restartGame();
                 } else {
                     promptGuesses();
