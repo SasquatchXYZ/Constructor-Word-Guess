@@ -2,6 +2,7 @@ const prompt = require('prompt');
 const inquirer = require('inquirer');
 const colors = require('colors');
 const randomWords = require('random-words');
+
 const Word = require('./word');
 
 let guessesLeft;
@@ -12,8 +13,8 @@ let playerName;
 
 function welcome() {
     usedWords = [];
-    console.log(`Hello and Welcome to Command Line Hangman featuring ALL OF THE ANIMALS`.bold.cyan);
-    console.log(`----------------------------------------------------------------------`.rainbow);
+    console.log(`         Hello and Welcome to Command Line Hangman         `.bold.cyan);
+    console.log(`-----------------------------------------------------------`.rainbow);
     inquirer
         .prompt([
             {
@@ -24,7 +25,7 @@ function welcome() {
         ])
         .then(function (response) {
             playerName = response.username;
-            console.log(`Welcome ${playerName}!`.bold.cyan);
+            console.log(`               !! Welcome ${playerName}! !!              `.bold.cyan);
             console.log(`Note: Enter 'Space' in place of a letter to exit the game`.bold.red);
             startGame();
         });
@@ -82,17 +83,6 @@ function promptGuesses() {
         if (response.userGuess === ' ') {
             console.log(`That's alright, please come back another time!`.bold.yellow);
         } else {
-
-
-            // inquirer
-            //     .prompt([
-            //         {
-            //             type: 'input',
-            //             message: `Guess a Letter?`.bold.green,
-            //             name: 'userGuess',
-            //         }
-            //     ])
-            //     .then(function (response) {
             word.guess(response.userGuess);
             word.wordArray.filter(Letter => {
                 scorekeeper.push(Letter.guessed);
@@ -108,7 +98,7 @@ function promptGuesses() {
                     promptGuesses();
                 }
             } else {
-                console.log(`Congrats! you guessed the word! The word was indeed "${chosenWord}"`);
+                console.log(`Congrats! you guessed the word! The word was indeed "${chosenWord}"`.bold.cyan);
                 startGame();
             }
         }

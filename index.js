@@ -1,4 +1,6 @@
 const inquirer = require('inquirer');
+const colors = require('colors');
+
 const Word = require('./word');
 
 const wordsArray = [
@@ -15,19 +17,19 @@ let playerName;
 
 function welcome() {
     usedWords = [];
-    console.log(`Hello and Welcome to Command Line Hangman featuring ALL OF THE ANIMALS`);
-    console.log(`----------------------------------------------------------------------`);
+    console.log(`Hello and Welcome to Command Line Hangman featuring ALL OF THE ANIMALS`.trap.yellow);
+    console.log(`----------------------------------------------------------------------`.rainbow);
     inquirer
         .prompt([
             {
                 type: 'input',
-                message: 'What is your name?',
+                message: 'What is your name?'.italic.magenta,
                 name: 'username',
             }
         ])
         .then(function (response) {
             playerName = response.username;
-            console.log(`Welcome ${playerName}!`);
+            console.log(`Welcome ${playerName}!`.bold.yellow);
             startGame();
         });
 }
@@ -39,7 +41,7 @@ function startGame() {
     if (usedWords.length < wordsArray.length) {
         chosenWord = wordSelector();
     } else {
-        console.log(`It looks like you used up all the animals in the bank...`);
+        console.log(`It looks like you used up all the animals in the bank...`.red);
         restartGame();
     }
     if (chosenWord) {
@@ -67,7 +69,7 @@ function promptGuesses() {
         .prompt([
             {
                 type: 'input',
-                message: 'Guess a Letter?',
+                message: 'Guess a Letter?'.green,
                 name: 'userGuess',
             }
         ])
@@ -87,13 +89,13 @@ function promptGuesses() {
             if (scorekeeper.indexOf(false) > -1 && guessesLeft > 0) {
                 guessesLeft--;
                 if (guessesLeft === 0) {
-                    console.log(`I'm sorry ${playerName} you used up all your guesses`);
+                    console.log(`I'm sorry ${playerName} you used up all your guesses`.italic.red);
                     restartGame();
                 } else {
                     promptGuesses();
                 }
             } else {
-                console.log(`Congrats! you guessed the word! The word was indeed "${chosenWord}"`);
+                console.log(`Congrats! you guessed the word! The word was indeed "${chosenWord}"`.bold.yellow);
                 startGame();
             }
 
@@ -112,7 +114,7 @@ function restartGame() {
         .prompt([
             {
                 type: 'confirm',
-                message: 'Would you like to play again?',
+                message: 'Would you like to play again?'.bold.blue,
                 name: 'confirm',
                 default: true
             }
@@ -122,7 +124,7 @@ function restartGame() {
                 usedWords = [];
                 startGame();
             } else {
-                console.log(`That's alright, please come back another time!`);
+                console.log(`That's alright, please come back another time!`.bold.yellow);
             }
         });
 }

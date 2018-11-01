@@ -1,5 +1,7 @@
-const Letter = require('./letter');
 const colors = require('colors');
+
+const Letter = require('./letter');
+
 
 let Word = function (chosenWord) {
     this.chosenWord = chosenWord;
