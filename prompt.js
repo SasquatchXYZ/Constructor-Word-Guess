@@ -25,6 +25,7 @@ function welcome() {
         .then(function (response) {
             playerName = response.username;
             console.log(`Welcome ${playerName}!`.bold.cyan);
+            console.log(`Note: Enter 'Space' in place of a letter to exit the game`.bold.red);
             startGame();
         });
 }
@@ -39,17 +40,17 @@ function startGame() {
     word.makeWordArray();
     promptGuesses();
 
-/*    if (usedWords.length < wordsArray.length) {
-        chosenWord = selectWord();
-    } else {
-        console.log(`It looks like you used up all the animals in the bank...`.bold.red);
-        restartGame();
-    }
-    if (chosenWord) {
-        word = new Word(chosenWord);
-        word.makeWordArray();
-        promptGuesses();
-    }*/
+    /*    if (usedWords.length < wordsArray.length) {
+            chosenWord = selectWord();
+        } else {
+            console.log(`It looks like you used up all the animals in the bank...`.bold.red);
+            restartGame();
+        }
+        if (chosenWord) {
+            word = new Word(chosenWord);
+            word.makeWordArray();
+            promptGuesses();
+        }*/
 }
 
 /*function selectWord() {
@@ -70,23 +71,28 @@ function promptGuesses() {
         properties: {
             userGuess: {
                 description: colors.green.bold('Guess a Letter?'),
-                pattern: /^[a-zA-z]+$/,
+                pattern: /^[a-zA-z\s]+$/,
                 maxLength: 1,
                 message: colors.red.bold(`Please Enter only a single letter... (Caps are acceptable, if you wish...)`),
                 required: true
             }
         }
     };
-prompt.get(schema, function(error, response) {
-    // inquirer
-    //     .prompt([
-    //         {
-    //             type: 'input',
-    //             message: `Guess a Letter?`.bold.green,
-    //             name: 'userGuess',
-    //         }
-    //     ])
-    //     .then(function (response) {
+    prompt.get(schema, function (error, response) {
+        if (response.userGuess === ' ') {
+            console.log(`That's alright, please come back another time!`.bold.yellow);
+        } else {
+
+
+            // inquirer
+            //     .prompt([
+            //         {
+            //             type: 'input',
+            //             message: `Guess a Letter?`.bold.green,
+            //             name: 'userGuess',
+            //         }
+            //     ])
+            //     .then(function (response) {
             word.guess(response.userGuess);
             word.wordArray.filter(Letter => {
                 scorekeeper.push(Letter.guessed);
@@ -105,7 +111,8 @@ prompt.get(schema, function(error, response) {
                 console.log(`Congrats! you guessed the word! The word was indeed "${chosenWord}"`);
                 startGame();
             }
-        });
+        }
+    });
 }
 
 /*
