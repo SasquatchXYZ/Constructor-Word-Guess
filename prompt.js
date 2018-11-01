@@ -18,7 +18,7 @@ function welcome() {
         .prompt([
             {
                 type: 'input',
-                message: 'What is your name?'.magenta,
+                message: 'What is your name?'.italic.magenta,
                 name: 'username',
             }
         ])
@@ -66,15 +66,27 @@ function startGame() {
 function promptGuesses() {
     let scorekeeper = [];
     word.stringifyWord();
-    inquirer
-        .prompt([
-            {
-                type: 'input',
-                message: 'Guess a Letter?',
-                name: 'userGuess',
+    let schema = {
+        properties: {
+            userGuess: {
+                description: colors.green.bold('Guess a Letter?'),
+                pattern: /^[a-zA-z]+$/,
+                maxLength: 1,
+                message: colors.red.bold(`Please Enter only a single letter... (Caps are acceptable, if you wish...)`),
+                required: true
             }
-        ])
-        .then(function (response) {
+        }
+    };
+prompt.get(schema, function(error, response) {
+    // inquirer
+    //     .prompt([
+    //         {
+    //             type: 'input',
+    //             message: `Guess a Letter?`.bold.green,
+    //             name: 'userGuess',
+    //         }
+    //     ])
+    //     .then(function (response) {
             word.guess(response.userGuess);
             word.wordArray.filter(Letter => {
                 scorekeeper.push(Letter.guessed);
@@ -84,7 +96,7 @@ function promptGuesses() {
             if (scorekeeper.indexOf(false) > -1 && guessesLeft > 0) {
                 guessesLeft--;
                 if (guessesLeft === 0) {
-                    console.log(`I'm sorry ${playerName} you used up all your guesses... The word was ${chosenWord}`.bold.red);
+                    console.log(`I'm sorry ${playerName} you used up all your guesses... The word was "${chosenWord}"`.red);
                     restartGame();
                 } else {
                     promptGuesses();
@@ -103,8 +115,6 @@ prompt.get(['username','email'], function (err, result) {
     console.log(`username: ${result.username}`);
     console.log(`email: ${result.email}`);
 });*/
-
-
 
 /*let schema = {
     properties: {

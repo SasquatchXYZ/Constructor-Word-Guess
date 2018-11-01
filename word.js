@@ -1,4 +1,5 @@
 const Letter = require('./letter');
+const colors = require('colors');
 
 let Word = function (chosenWord) {
     this.chosenWord = chosenWord;
@@ -18,7 +19,7 @@ let Word = function (chosenWord) {
             return wordLetter.renderChar();
         });
 
-        console.log(displayWord.toString().split(',').join(' '));
+        console.log(displayWord.toString().split(',').join(' ').rainbow);
         return displayWord.toString().split(',').join(' ');
 
     };
