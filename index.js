@@ -11,6 +11,7 @@ const wordsArray = [
 
 let guessesLeft;
 let usedWords;
+let guessedLetters;
 let word;
 let chosenWord;
 let playerName;
@@ -35,13 +36,14 @@ function welcome() {
 }
 
 function startGame() {
+    guessedLetters = [];
     chosenWord = '';
     guessesLeft = 15;
     //console.log(usedWords);
     if (usedWords.length < wordsArray.length) {
         chosenWord = wordSelector();
     } else {
-        console.log(`It looks like you used up all the animals in the bank...`.red);
+        console.log(`It looks like you've gone through all these animals...`.red);
         restartGame();
     }
     if (chosenWord) {
@@ -74,38 +76,30 @@ function promptGuesses() {
             }
         ])
         .then(function (response) {
-            /*            word.wordArray.forEach(letter => {
-                            letter(response.userguess);
-                            scorekeeper.push(letter.renderChar());
-                        });*/
-            //scorekeeper.push(response.userGuess);
-            word.guess(response.userGuess);
-            word.wordArray.filter(Letter => {
-                scorekeeper.push(Letter.guessed);
-            });
-            //console.log(scorekeeper);
-            //promptGuesses();
-
-            if (scorekeeper.indexOf(false) > -1 && guessesLeft > 0) {
-                guessesLeft--;
-                if (guessesLeft === 0) {
-                    console.log(`I'm sorry ${playerName} you used up all your guesses... the word was "${chosenWord}"`.italic.red);
-                    restartGame();
+            if (guessedLetters.indexOf(response.userGuess) === -1) {
+                guessedLetters.push(response.userGuess);
+                word.guess(response.userGuess);
+                word.wordArray.filter(Letter => {
+                    scorekeeper.push(Letter.guessed);
+                });
+                //console.log(scorekeeper);
+                //promptGuesses();
+                if (scorekeeper.indexOf(false) > -1 && guessesLeft > 0) {
+                    guessesLeft--;
+                    if (guessesLeft === 0) {
+                        console.log(`I'm sorry ${playerName} you used up all your guesses... the word was "${chosenWord}"`.italic.red);
+                        restartGame();
+                    } else {
+                        promptGuesses();
+                    }
                 } else {
-                    promptGuesses();
+                    console.log(`Congrats! you guessed the word! The word was indeed "${chosenWord}"`.bold.yellow);
+                    startGame();
                 }
             } else {
-                console.log(`Congrats! you guessed the word! The word was indeed "${chosenWord}"`.bold.yellow);
-                startGame();
+                console.log(`You have already guessed that letter ${playerName}...`.bold.red);
+                promptGuesses();
             }
-
-            /*            if (scorekeeper.indexOf(false) === -1) {
-                            console.log(`Congrats! you guessed the word!`);
-                        } else if (scorekeeper.indexOf(false) > -1 && guessesLeft > 0) {
-                            promptGuesses();
-                        }*/
-
-
         });
 }
 
