@@ -1,6 +1,7 @@
 const prompt = require('prompt');
 const inquirer = require('inquirer');
 const colors = require('colors');
+const randomWords = require('random-words');
 const Word = require('./word');
 
 let guessesLeft;
@@ -29,24 +30,71 @@ function welcome() {
 }
 
 function startGame() {
-    chosenWord = '';
+    //chosenWord = '';
     guessesLeft = 15;
     //console.log(usedWords);
-    if (usedWords.length < wordsArray.length) {
-        chosenWord = wordSelector();
+
+    chosenWord = randomWords();
+    word = new Word(chosenWord);
+    word.makeWordArray();
+    promptGuesses();
+
+/*    if (usedWords.length < wordsArray.length) {
+        chosenWord = selectWord();
     } else {
-        console.log(`It looks like you used up all the animals in the bank...`);
+        console.log(`It looks like you used up all the animals in the bank...`.bold.red);
         restartGame();
     }
     if (chosenWord) {
         word = new Word(chosenWord);
         word.makeWordArray();
         promptGuesses();
-    }
+    }*/
 }
 
+/*function selectWord() {
+    let randomizer = Math.floor(Math.random() * wordsArray.length);
+    let randomWord = wordsArray[randomizer];
+    if (usedWords.indexOf(randomWord) === -1) {
+        usedWords.push(randomWord);
+        return randomWord;
+    } else {
+        return selectWord;
+    }
+}*/
 
-
+function promptGuesses() {
+    let scorekeeper = [];
+    word.stringifyWord();
+    inquirer
+        .prompt([
+            {
+                type: 'input',
+                message: 'Guess a Letter?',
+                name: 'userGuess',
+            }
+        ])
+        .then(function (response) {
+            word.guess(response.userGuess);
+            word.wordArray.filter(Letter => {
+                scorekeeper.push(Letter.guessed);
+            });
+            //console.log(scorekeeper);
+            //promptGuesses();
+            if (scorekeeper.indexOf(false) > -1 && guessesLeft > 0) {
+                guessesLeft--;
+                if (guessesLeft === 0) {
+                    console.log(`I'm sorry ${playerName} you used up all your guesses... The word was ${chosenWord}`.bold.red);
+                    restartGame();
+                } else {
+                    promptGuesses();
+                }
+            } else {
+                console.log(`Congrats! you guessed the word! The word was indeed "${chosenWord}"`);
+                startGame();
+            }
+        });
+}
 
 /*
 prompt.start();
@@ -84,5 +132,24 @@ prompt.get(schema, function(error, result) {
     console.log(`name: ${result.name}`);
     console.log(`password: ${result.password}`);
 });*/
+function restartGame() {
+    inquirer
+        .prompt([
+            {
+                type: 'confirm',
+                message: `Would you like to play again?`.bold.blue,
+                name: 'confirm',
+                default: true
+            }
+        ])
+        .then(function (response) {
+            if (response.confirm) {
+                usedWords = [];
+                startGame();
+            } else {
+                console.log(`That's alright, please come back another time!`.bold.yellow);
+            }
+        });
+}
 
 welcome();

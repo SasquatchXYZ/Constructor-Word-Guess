@@ -93,7 +93,7 @@ function promptGuesses() {
                     promptGuesses();
                 }
             } else {
-                console.log(`Congrats! you guessed the word! The word was indeed "${word.stringifyWord()}"`);
+                console.log(`Congrats! you guessed the word! The word was indeed "${chosenWord}"`);
                 startGame();
             }
 
