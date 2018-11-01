@@ -5,7 +5,7 @@ This is a Hangman game that runs in the command line using Node.js, programmed u
 
 There is a second version of the game which uses the 'prompt' npm module in places for the queries, which allowed me to restrict the character inputs to just letters, or a space (which is used to exit the game).  Rather that using the word bank that I had previously generated this one uses the 'random-words' npm module to provide a random word for the game.
 
-![Constructor-Word-Guess](screenshots/LIRIBotv2.gif) 
+![Constructor-Word-Guess](screenshots/constructor-word-guess.gif)
 
 ## Getting Started
 
@@ -52,6 +52,9 @@ node prompt.js
 ```
 
 And it will prompt you via inquirer for your name and then simply ask for you to guess letters for the word.
+
+![index.js](screenshots/v1.png)
+![prompt.js](screenshots/v2.png)
 
 ## Built With
 
