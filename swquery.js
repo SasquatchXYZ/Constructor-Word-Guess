@@ -1,3 +1,4 @@
+// Star Wars API =======================================================================================================
 const StarWarsAPI = require('star-wars-api');
 swapi = new StarWarsAPI;
 
@@ -8,6 +9,8 @@ swapi.get('starships', [9, 10])
     .then(console.log);
 
 /*
+
+// Pokemon API =========================================================================================================
 const Pokedex = require('pokedex-promise-v2');
 const options = {
     protocol: 'https',
