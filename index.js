@@ -1,7 +1,7 @@
 const inquirer = require('inquirer');
 const colors = require('colors');
 
-const Word = require('./word');
+const Word = require('./assets/word');
 
 const wordsArray = [
     "cat", "dog", "hippopotamus", "rhinoceros", "horse", "donkey", "llama", "hoopoe", "labradoodle", "ostrich", "fox", "turaco", "dove",

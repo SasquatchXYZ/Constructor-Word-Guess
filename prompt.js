@@ -3,7 +3,7 @@ const inquirer = require('inquirer');
 const colors = require('colors');
 const randomWords = require('random-words');
 
-const Word = require('./word');
+const Word = require('./assets/word');
 
 let guessesLeft;
 let guessedLetters;
